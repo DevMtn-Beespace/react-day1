@@ -6,14 +6,16 @@ Render
 
 State
   getInitialState - defines the starting state
-setState
-  Changes component's state and causes a re-render
+  setState - Changes component's state and causes a re-render
 
 miniProject - TO DO list
 - Create a React component
 - Link an input to the state
 - Add a button that adds the input a list to the state
 - render the list
+
+Partial Application
+
 
 
 Run webpack to bundle react & JS

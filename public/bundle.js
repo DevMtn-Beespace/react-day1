@@ -56,52 +56,69 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var App = _react2.default.createClass({
-	  displayName: 'App',
-	  // inside here is all react components
+	var App2 = _react2.default.createClass({
+	  displayName: 'App2',
 	  getInitialState: function getInitialState() {
 	    return {
-	      name: "Michael",
-	      tempName: "",
-	      list: ["1", "2", "3"]
+	      name: "To Do List",
+	      list: [],
+	      currentItem: ""
 	    };
 	  },
 	  render: function render() {
-	    // the method that returns what the component looks like
+	    var _this = this;
+	
 	    return _react2.default.createElement(
 	      'div',
 	      null,
+	      'Hello World',
 	      _react2.default.createElement(
 	        'div',
 	        { onClick: this.handleClick },
-	        this.state.name,
-	        this.state.tempName
+	        this.state.name
 	      ),
-	      _react2.default.createElement('input', { onChange: this.handleChange }),
-	      this.state.list.map(function (value) {
+	      _react2.default.createElement('input', {
+	        value: this.state.currentItem,
+	        onChange: this.handleChange }),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.handleClick },
+	        'Add'
+	      ),
+	      this.state.list.map(function (value, index) {
 	        return _react2.default.createElement(
 	          'div',
-	          { key: value },
-	          value
+	          {
+	            onClick: _this.handleRemove.bind(_this, index) // partial application. Binds the proper index as well as 'this'
+	            , key: index },
+	          value,
+	          '  X '
 	        ) // making an array filled with divs
 	        ;
 	      })
 	    );
 	  },
+	  handleRemove: function handleRemove(removeIndex) {
+	    this.setState({
+	      list: this.state.list.filter(function (value, index) {
+	        return index !== removeIndex;
+	      }) // implicit return one line ES6
+	    });
+	  },
 	  handleChange: function handleChange(event) {
 	    this.setState({
-	      tempName: event.target.value
+	      currentItem: event.target.value
 	    });
 	  },
 	  handleClick: function handleClick() {
 	    this.setState({
-	      name: this.state.tempName
+	      list: this.state.list.concat([this.state.currentItem]),
+	      currentItem: ""
 	    });
 	  }
-	}); // an ES6 require statement, like express, etc.
+	});
 	
-	
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(App2, null), document.getElementById('app2'));
 
 /***/ },
 /* 1 */
